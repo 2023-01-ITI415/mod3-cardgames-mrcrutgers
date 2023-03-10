@@ -97,7 +97,7 @@ void LayoutMine() {
             cp.layoutSlot = slot; 
             // CardProspectors in the mine have the state CardState.mine 
             cp.state = eCardState.mine; 
-            
+
             cp.SetSpriteSortingLayer(slot.layer);
  
             mine.Add(cp); // Add this CardProspector to the List < > mine 
@@ -170,6 +170,24 @@ void MoveToDiscard(CardProspector cp) {
                 } 
             }
 
+/// < summary > > /// Handler for any time a card in the game is clicked > /// </ summary > > /// < param name =" cp" > The CardProspector that was clicked </ param > 
+static public void CARD_CLICKED(CardProspector cp) { 
+    // The reaction is determined by the state of the clicked card 
+    switch (cp.state) { 
+        case eCardState.target: 
+        // Clicking the target card does nothing 
+        break; 
+        case eCardState.drawpile: 
+        // Clicking *any* card in the drawPile will draw the next card 
+        // Call two methods on the Prospector Singleton S 
+        S.MoveToTarget(S.Draw() ); // Draw a new target card 
+        S.UpdateDrawPile(); // Restack the drawPile 
+        break; 
+        case eCardState.mine: 
+        // More to come here 
+        break; 
+        } 
+        }
 
 
 

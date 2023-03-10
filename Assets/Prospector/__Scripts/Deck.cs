@@ -64,7 +64,7 @@ void MakeCards() {
         Card MakeCard(char suit, int rank) { 
             GameObject go = Instantiate<GameObject>(prefabCard, deckAnchor); // f 
             Card card = go.GetComponent<Card>(); 
-            card.Init( suit, rank, startFaceUp);
+            card.Init(suit, rank, startFaceUp);
             return card;
         }
           
