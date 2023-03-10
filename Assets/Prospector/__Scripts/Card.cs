@@ -36,8 +36,9 @@ public void Init(char eSuit, int eRank, bool startFaceUp = true) {
     AddDecorators();
     AddPips();
     AddFace();
+    AddBack();
     // Build the card from Sprites // a
-    
+    faceUp =startFaceUp;
     } 
     /// < summary > > /// Shortcut for setting transform.localPosition. > /// </ summary > > /// < param name =" v" > </ param > 
     public virtual void SetLocalPos(Vector3 v) { // b 
@@ -142,8 +143,24 @@ private void AddFace() {
         }
 
 
+/// < summary > > /// Property to show and hide the back of the card. > /// </ summary > 
+public bool faceUp { 
+    get { return (! back.activeSelf); } // a 
+    set { back.SetActive(! value); } 
+    }
 
 
+/// </ summary > 
+private void AddBack() { 
+    _tGO = Instantiate<GameObject>(Deck.SPRITE_PREFAB, transform ); 
+    _tSRend = _tGO.GetComponent<SpriteRenderer>(); 
+    _tSRend.sprite = CardSpritesSO.BACK; 
+    _tGO.transform.localPosition = Vector3.zero; 
+    // 2 is a higher sortingOrder than anything else 
+    _tSRend.sortingOrder = 2; // b 
+    _tGO.name = "back"; 
+    back = _tGO; 
+    }
 
 
 

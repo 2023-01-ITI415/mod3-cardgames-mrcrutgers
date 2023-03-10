@@ -21,9 +21,9 @@ public List <Card> cards;
 private JsonParseDeck jsonDeck; 
 static public GameObject SPRITE_PREFAB {get; private set;} 
 
-void Start() { 
-    InitDeck(); 
-    }  
+// void Start() { 
+//     InitDeck(); 
+//     }  
 
     /// < summary > > /// The Prospector class will call InitDeck to set up the deck and build > /// all 52 card GameObjects from the jsonDeck and cardSprites information. > /// </ summary > 
      public void InitDeck() { 
@@ -37,6 +37,7 @@ void Start() {
         if (GameObject.Find("_Deck") == null ) { // c 
         GameObject anchorGO = new GameObject("_Deck"); 
         deckAnchor = anchorGO.transform; 
+        Shuffle(ref cards);
         }
 
 MakeCards(); 
@@ -67,5 +68,29 @@ void MakeCards() {
             return card;
         }
           
+static public void Shuffle( ref List < Card > refCards) { // a 
+// Create a temporary List to hold the new shuffle order 
+List <Card> tCards = new List <Card>(); 
+
+int ndx; // This will hold the index of the card to be moved 
+// Repeat as long as there are cards in the original List 
+while (refCards.Count > 0) { 
+    // Pick the index of a random card 
+ ndx = Random.Range(0, refCards.Count); 
+    // Add that card to the temporary List 
+    tCards.Add (refCards[ndx]); 
+    // And remove that card from the original List 
+    refCards.RemoveAt(ndx); 
+    } 
+    // Replace the original List with the temporary List 
+    refCards = tCards; // c 
+    }
+
+
+
+
+
+
+
 
 }
